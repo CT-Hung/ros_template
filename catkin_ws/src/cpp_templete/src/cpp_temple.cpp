@@ -1,5 +1,5 @@
-/* For RobotX competition
-   Recorder controll part is written by CT-Hung and modified to ROS version by Sam Liu
+/* For ros 
+ * This roscpp templete is written by CT-Hung
 */
 
 
