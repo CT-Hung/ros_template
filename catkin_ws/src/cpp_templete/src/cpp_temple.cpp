@@ -4,81 +4,17 @@
 
 
 // For ROS
-#include <ros/ros.h>
-#include "std_msgs/Float64.h"
-#include "std_msgs/Int16.h"
-
-using namespace std;
-
-class TEMPLETE
-{
-    public:
-        TEMPLETE();                     // Constructor
-        ~TEMPLETE();                    // Destructor
-        void OnStartUp();
-        void Iterate(const ros::TimerEvent&);
-
-        // ROS parameter
-        ros::NodeHandle m_nh;                         // Private node handler
-        ros::Timer timer;
-
-        // Publisher
-        void PublishedSetting();
-        ros::Publisher pub_foo;                   // Private publisher instance
-        
-        // Subscriber
-        ros::Subscriber sub_foo;
-        void SubscribedSetting();
-        void sub_callback(const std_msgs::Float64::ConstPtr& msg);
-
-    private:
-        int m_startup_msg;
-        int m_count;
-};
+#include "cpp_temple.h"
 
 /*                                    */
 /************ Constructor *************/
 /*                                    */
 TEMPLETE::TEMPLETE()
 {
+    m_loopFreq = 4;
     m_count = 1;
 }
 
-void TEMPLETE::OnStartUp()
-{
-    // Import parameter from yaml file
-    if (!ros::param::get("Foo", m_startup_msg))
-        m_startup_msg = 0;
-}
-
-void TEMPLETE::PublishedSetting()
-{
-    // Setup the publisher
-    pub_foo = m_nh.advertise<std_msgs::Int16>("publish_foobar", 10);
-}
-
-void TEMPLETE::sub_callback(const std_msgs::Float64::ConstPtr& msg)
-{
-    double a;
-    a = msg->data;
-    ROS_INFO("Get : [%f]", a);
-}
-
-void TEMPLETE::Iterate(const ros::TimerEvent&)
-{
-    std_msgs::Int16 msg;
-    m_count++;
-  //  ROS_INFO("Iterate Get : [%d]", m_count);
-    msg.data = m_count;
-    pub_foo.publish(msg);
-
-}
-
-void TEMPLETE::SubscribedSetting()
-{
-
-    sub_foo = m_nh.subscribe("subscribe_foobar", 1000, &TEMPLETE::sub_callback, this);
-}
 /*                                    */
 /************* Destructor *************/
 /*                                    */
@@ -86,18 +22,67 @@ TEMPLETE::~TEMPLETE()
 {
 }
 
+/* Set the start varible here from yaml file. */
+void TEMPLETE::OnStartUp()
+{
+    // Import parameter from yaml file
+    string key;
+    if (m_nh.searchParam("loopFreq", key))
+        m_nh.getParam(key, m_loopFreq);
+    if (m_nh.searchParam("count", key))
+        m_nh.getParam(key, m_count);
+ //   if (!ros::param::get("loopFreq", m_loopFreq))
+ //       m_loopFreq = 4;
+ //   if (!ros::param::get("count", m_count))
+ //       m_count = 10;
+}
+
+/* Set the publihers here. */
+void TEMPLETE::PublishedSetting()
+{
+    // Setup the publisher
+    pub_foo = m_nh.advertise<std_msgs::Int16>("publish_foobar", 10);
+}
+
+/* Set the subscribers here. */
+void TEMPLETE::SubscribedSetting()
+{
+    sub_foo = m_nh.subscribe("subscribe_foobar", 1000, &TEMPLETE::sub_callback, this);
+}
+
+/* Set the callback function of subscriber. */
+void TEMPLETE::sub_callback(const std_msgs::Float64::ConstPtr& msg)
+{
+    ROS_INFO("Sub Get : [%f]", msg->data); //need to use pointer to get the value.
+    m_count = msg->data;
+}
+
+/* Loop setting. Do your main thing here. */
+void TEMPLETE::Iterate(const ros::TimerEvent&)
+{
+    std_msgs::Int16 msg;
+    m_count++;
+    ROS_INFO("Iterate Get : [%d]", m_count);
+    msg.data = m_count;
+    pub_foo.publish(msg);
+
+}
+
+
+/* main function */ 
+/* Don't change this part normally.*/
 int main (int argc, char** argv)
 {
     // Initialize ROS
     ros::init(argc, argv, "hydrophone_data_node");
     
-    // Create hydrophone object
+    // Create object
     TEMPLETE templete_obj;
+    templete_obj.OnStartUp();
     templete_obj.PublishedSetting();
     templete_obj.SubscribedSetting();
-    templete_obj.timer = templete_obj.m_nh.createTimer(ros::Duration(1), &TEMPLETE::Iterate, &templete_obj);
+    templete_obj.timer = templete_obj.m_nh.createTimer(ros::Duration(templete_obj.m_loopFreq), &TEMPLETE::Iterate, &templete_obj);
     ros::spin();
-
 
     return 0;
 }
