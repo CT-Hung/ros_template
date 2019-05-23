@@ -27,14 +27,10 @@ void TEMPLETE::OnStartUp()
 {
     // Import parameter from yaml file
     string key;
-    if (m_nh.searchParam("loopFreq", key))
-        m_nh.getParam(key, m_loopFreq);
-    if (m_nh.searchParam("count", key))
-        m_nh.getParam(key, m_count);
- //   if (!ros::param::get("loopFreq", m_loopFreq))
- //       m_loopFreq = 4;
- //   if (!ros::param::get("count", m_count))
- //       m_count = 10;
+    if (ros::param::search("loopFreq", key))
+        ros::param::get(key, m_loopFreq);
+    if (ros::param::search("count", key))
+        ros::param::get(key, m_count);
 }
 
 /* Set the publihers here. */
