@@ -1,0 +1,9 @@
+<launch>
+    <!-- Setup file -->
+    <arg name="param_file" default="templete"/>
+
+    <!-- Node -->
+    <node name="templete" pkg="cpp_templete" type="cpp_templete" output="screen" clear_params="true" required="true">
+        <rosparam command="load" file="$(find cpp_templete)/config/$(arg param_file).yaml" />
+    </node>
+</launch>
