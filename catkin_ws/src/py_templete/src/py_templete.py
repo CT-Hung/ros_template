@@ -16,10 +16,10 @@ class TEMPLETE(object):
         rospy.Timer(rospy.Duration(self.loopFreq), self.Iterate)
         
         #Publisher
-        self.pub_bar = rospy.Publisher("FOO", Float64, queue_size=1)
+        self.pub_bar = rospy.Publisher("pub_foo", Float64, queue_size=1)
 
         #Subscriber
-        self.sub_bar = rospy.Subscriber("FOO", Float64, self.callBack, queue_size=1)
+        self.sub_bar = rospy.Subscriber("sub_foo", Float64, self.callBack, queue_size=1)
 
     def OnStartUp(self):
         #Set the params at yaml file

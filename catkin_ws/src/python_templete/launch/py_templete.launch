@@ -1,9 +1,0 @@
-<launch>
-    <!-- Setup file -->
-    <arg name="param_file" default="templete"/>
-
-    <!-- Node -->
-    <node name="templete" pkg="python_templete" type="py_templete.py" output="screen" clear_params="true" required="true">
-        <rosparam command="load" file="$(find python_templete)/config/$(arg param_file).yaml" />
-    </node>
-</launch>
