@@ -198,7 +198,7 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-## Build talker and listener
+## Build node
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 add_executable(cpp_temp src/cpp_temple.cpp)

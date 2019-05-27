@@ -43,7 +43,7 @@ int createLaunchFile(string arthor_name, string node_name, string pkg_name)
     context << "echo \"";
     context << "<launch>" << "\n";
     context << "    <!-- Setup file -->" << "\n";
-    context << "    <arg name=\\\"param_file\\\" default=\\\"" << node_name << "\\\"/>" << "\n";
+    context << "    <arg name=\\\"param_file\\\" default=\\\"param_" << node_name << "\\\"/>" << "\n";
     context << "\n";
     context << "    <!-- Node --> "<< "\n";
     context << "    <node name=\\\"" << node_name << "\\\" pkg=\\\"" << pkg_name << "\\\" type=\\\"" << node_name << "\\\" output=\\\"screen\\\" clear_params=\\\"true\\\" required=\\\"true\\\">" << "\n";
@@ -107,7 +107,7 @@ int createCppFile(string arthor_name, string node_name, string pkg_name)
     context << "/* Set the subscribers here. */" << "\n";
     context << "void " << node_name << "::SubscribedSetting()" << "\n";
     context << "{" << "\n";
-    context << "    sub_foo = m_nh.subscribe(\\\"subscribe_foobar\\\", 1000, &TEMPLETE::sub_callback, this);" << "\n";
+    context << "    sub_foo = m_nh.subscribe(\\\"subscribe_foobar\\\", 1000, &" << node_name << "::sub_callback, this);" << "\n";
     context << "}" << "\n";
     context << "\n";
     context << "/* Set the callback function of subscriber. */" << "\n";
