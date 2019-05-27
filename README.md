@@ -1,7 +1,7 @@
 # ros_templete
 
-> This is a templete for ros.
-> The python part of autoCreateTemplete isn't done yet.
+> This is a templete for ros.  
+> The python part of autoCreateTemplete isn't done yet.  
 
 ## Method 1.
 > There are python and cpp templetes in catkin_ws folder.
