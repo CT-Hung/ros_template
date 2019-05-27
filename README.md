@@ -1,7 +1,6 @@
 # ros_template
 
 > This is a template for ros.  
-> The python part of autoCreateTemplate isn't done yet.  
 > First, create a package by yourself.  
 > And then follow following method.  
 
