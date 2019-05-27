@@ -3,13 +3,13 @@
 This is a templete for ros.
 The python part of autoCreateTemplete isn't done yet.
 
-Method 1.
+## Method 1.
 There are python and cpp templetes in catkin_ws folder.
 Copy the file into your ros pkg and change the node name.
 
-Method 2
-$ cd autoCreateTemplete
-$ mkdir build; cd build
+## Method 2
+'$ cd autoCreateTemplete'
+'$ mkdir build; cd build'
 $ cmake ../
 $ make
 
