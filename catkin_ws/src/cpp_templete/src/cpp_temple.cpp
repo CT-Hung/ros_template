@@ -70,7 +70,7 @@ void TEMPLETE::Iterate(const ros::TimerEvent&)
 int main (int argc, char** argv)
 {
     // Initialize ROS
-    ros::init(argc, argv, "hydrophone_data_node");
+    ros::init(argc, argv, "cpp_templete_node");
     
     // Create object
     TEMPLETE templete_obj;
