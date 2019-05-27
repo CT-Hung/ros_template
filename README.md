@@ -21,4 +21,13 @@
 1. launch/param_<node_name>.launch 
 2. config/<node_name>.yaml 
 3. src/<node_name>.cpp 
-4. src/<node_name>.h 
+4. src/<node_name>.h  
+> Add node into CMakeLists.txt.  
+
+## Create python template
+> `$ createRosPyTemplate <arthor_name> <node_name> <pkg_name>`  
+> This will create three folders and three files:   
+1. launch/param_<node_name>.launch 
+2. config/<node_name>.yaml 
+3. src/<node_name>.py  
+> `$ chmod +x src/<node_name>.py`
