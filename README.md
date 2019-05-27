@@ -2,6 +2,8 @@
 
 > This is a templete for ros.  
 > The python part of autoCreateTemplete isn't done yet.  
+> First, create a package by yourself.  
+> And then follow following method.  
 
 ## Method 1.
 > There are python and cpp templetes in catkin_ws folder.  
